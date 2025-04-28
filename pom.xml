@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <!-- Версия модели POM -->
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Твои данные проекта -->
-    <groupId>com.example</groupId>
+    <groupId>ru.netology</groupId>
     <artifactId>task-7</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <!-- Зависимости проекта -->
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <dependencies>
-        <!-- Зависимость для JUnit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.7.1</version> <!-- или любая актуальная версия -->
+            <version>5.7.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -29,34 +30,19 @@
         </dependency>
     </dependencies>
 
-
-    <!-- Конфигурация сборки -->
     <build>
         <plugins>
-            <!-- Плагин JaCoCo для анализа покрытия -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+            </plugin>
+
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.11</version>
                 <executions>
-                    <!-- Фаза подготовки агента JaCoCo для анализа -->
-                    <execution>
-                        <id>prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-
-                    <!-- Генерация отчета о покрытии на фазе verify -->
-                    <execution>
-                        <id>report</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-
-                    <!-- Проверка покрытия и обрушение сборки, если покрытие меньше 80% -->
                     <execution>
                         <id>check</id>
                         <goals>
@@ -70,9 +56,17 @@
                                         <limit>
                                             <counter>INSTRUCTION</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>1.00</minimum>
+                                            <minimum>1.0</minimum>
+                                        </limit>
+                                        <limit>
+                                            <counter>BRANCH</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>1.0</minimum>
                                         </limit>
                                     </limits>
+                                    <excludes>
+                                        <exclude>org.example.*</exclude>
+                                    </excludes>
                                 </rule>
                             </rules>
                         </configuration>

@@ -1,19 +1,51 @@
 package ru.netology.statistic;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class StatisticsServiceTest {
+class StatisticsServiceTest {
+
+    StatisticsService service = new StatisticsService();
 
     @Test
-    void findMax() {
-        StatisticsService service = new StatisticsService();
+    void shouldFindMaxInMiddle() {
+        long[] incomes = {5, 8, 3, 10, 6, 4};
+        long expected = 10;
+        assertEquals(expected, service.findMax(incomes));
+    }
 
-        long[] incomesInBillions = {12, 5, 8, 4, 5, 3, 8, 6, 11, 11, 12};
-        long expected = 12;
+    @Test
+    void shouldFindMaxAtStart() {
+        long[] incomes = {10, 8, 6, 4, 2};
+        long expected = 10;
+        assertEquals(expected, service.findMax(incomes));
+    }
 
-        long actual = service.findMax(incomesInBillions);
+    @Test
+    void shouldFindMaxAtEnd() {
+        long[] incomes = {1, 2, 3, 4, 10};
+        long expected = 10;
+        assertEquals(expected, service.findMax(incomes));
+    }
 
-        Assertions.assertEquals(expected, actual);
+    @Test
+    void shouldFindMaxWithAllSame() {
+        long[] incomes = {7, 7, 7, 7};
+        long expected = 7;
+        assertEquals(expected, service.findMax(incomes));
+    }
+
+    @Test
+    void shouldFindMaxWithNegativeNumbers() {
+        long[] incomes = {-10, -20, -30, -5, -15};
+        long expected = -5;
+        assertEquals(expected, service.findMax(incomes));
+    }
+
+    @Test
+    void shouldFindMaxWithSingleElement() {
+        long[] incomes = {42};
+        long expected = 42;
+        assertEquals(expected, service.findMax(incomes));
     }
 }
