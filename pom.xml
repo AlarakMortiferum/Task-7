@@ -65,13 +65,12 @@
                         <configuration>
                             <rules>
                                 <rule>
-                                    <element>BUNDLE</element> <!-- Проверка всего проекта -->
+                                    <element>BUNDLE</element>
                                     <limits>
-                                        <!-- Минимум 80% покрытия инструкций -->
                                         <limit>
                                             <counter>INSTRUCTION</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.80</minimum>
+                                            <minimum>1.00</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
